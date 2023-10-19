@@ -1,8 +1,9 @@
 import smtplib
 import pandas as pd
+import os
 
-# Substitua 'seu_arquivo.xlsx' pelo caminho do seu arquivo Excel
-caminho_arquivo = "C:\\Users\\user\\Desktop\\dados.xlsx"
+#caminho da base que será lida 
+caminho_arquivo = "D:\\Espaço_de_projetos\\ETL_DIO_Projeto\\dados.xlsx"
 
 # Lê o arquivo Excel usando o pandas
 try:
@@ -55,8 +56,16 @@ try:
         server.close()
 
         print('Email enviado com sucesso!')
+
+        #Apaga o arquivo com os nomes limpos
+        os.remove("nomes_limpos.xlsx")
+
+        #encerra
+        exit()
+
     except smtplib.SMTPException as e:
         print('Erro ao enviar o e-mail:', e)
+
 
 except FileNotFoundError:
     print(f"Arquivo '{caminho_arquivo}' não encontrado.")
